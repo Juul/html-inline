@@ -10,3 +10,4 @@ html-inline {-i INFILE -o OUTFILE -b BASEDIR}
   --ignore-images Don't inline images. Default: false
   --ignore-scripts Don't inline JavaScript. Default: false
   --ignore-styles Don't inline CSS. Default: false
+  --template-wildcards Enable template wildcards. See readme. Default: false

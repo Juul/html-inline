@@ -9,7 +9,8 @@ var argv = minimist(process.argv.slice(2), {
     alias: { i: 'infile', o: 'outfile', b: 'basedir', h: 'help',
              ignoreImages: 'ignore-images',
              ignoreScripts: 'ignore-scripts',
-             ignoreStyles: 'ignore-styles' },
+             ignoreStyles: 'ignore-styles',
+             templateWildcards: 'template-wildcards' },
     default: { outfile: '-' }
 });
 

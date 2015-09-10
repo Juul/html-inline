@@ -57,7 +57,33 @@ html-inline {-i INFILE -o OUTFILE -b BASEDIR}
   --ignore-images Don't inline images. Default: false
   --ignore-scripts Don't inline JavaScript. Default: false
   --ignore-styles Don't inline CSS. Default: false
+  --template-wildcards Enable template wildcards. See readme. Default: false
 ```
+
+The --template-wildcards will cause html-inline to look for script tags with type="text/template" and a src attribute containing a * like so:
+
+```
+<script type="text/template" src="templates/*.html"></script>
+```
+
+and will inline each template file inside its own script tag, setting the id based on the filename. Given the files:
+
+```
+templates/cookie.html
+templates/cat.html
+```
+
+The following will be generated:
+
+```
+<script type="text/template" id="cookie-template">
+  <p>He's a pet for your tummy!</p>
+</script>
+<script type="text/template" id="cat-template">
+  <p>He's super duper yummy</p>
+</script>
+```
+
 
 # methods
 

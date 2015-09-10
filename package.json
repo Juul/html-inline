@@ -1,12 +1,14 @@
 {
   "name": "html-inline",
-  "version": "1.1.2",
+  "version": "1.1.1",
   "description": "inline javascript, stylehseets, and images from an html page",
   "main": "index.js",
   "bin": {
     "html-inline": "bin/cmd.js"
   },
   "dependencies": {
+    "combined-stream2": "^1.1.1",
+    "glob": "^5.0.14",
     "minimist": "~1.1.0",
     "through2": "~0.6.3",
     "trumpet": "~1.7.0"
@@ -33,5 +35,30 @@
     "email": "mail@substack.net",
     "url": "http://substack.net"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "gitHead": "190ed6e1bcea87e2cc54c0201c1e546d6599c02c",
+  "bugs": {
+    "url": "https://github.com/substack/html-inline/issues"
+  },
+  "_id": "html-inline@1.1.1",
+  "_shasum": "c9209be2f5dea8b97c643d6bb761f1ca0a1d807d",
+  "_from": "html-inline@*",
+  "_npmVersion": "2.1.8",
+  "_nodeVersion": "0.10.31",
+  "_npmUser": {
+    "name": "substack",
+    "email": "mail@substack.net"
+  },
+  "maintainers": [
+    {
+      "name": "substack",
+      "email": "mail@substack.net"
+    }
+  ],
+  "dist": {
+    "shasum": "c9209be2f5dea8b97c643d6bb761f1ca0a1d807d",
+    "tarball": "http://registry.npmjs.org/html-inline/-/html-inline-1.1.1.tgz"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/html-inline/-/html-inline-1.1.1.tgz"
 }

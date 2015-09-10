@@ -1,5 +1,7 @@
 var trumpet = require('trumpet');
+var glob = require('glob');
 var through = require('through2');
+var CombinedStream = require('combined-stream2');
 var fs = require('fs');
 var path = require('path');
 
@@ -10,11 +12,38 @@ module.exports = function (opts) {
 
     if (!(opts.ignoreScripts || opts['ignore-scripts'])) {
         tr.selectAll('script[src]', function (node) {
-            var file = fix(node.getAttribute('src'));
-            node.removeAttribute('src');
-            fs.createReadStream(file)
-                .pipe(node.createWriteStream())
-            ;
+            var src = node.getAttribute('src');
+
+            if(opts['template-wildcards']
+               && node.getAttribute('type') == 'text/template' 
+               && src.match(/\*/)) {
+
+                var wstream = node.createWriteStream({outer: true});
+                src = fix(node.getAttribute('src'));
+                var cstream = CombinedStream.create();
+                var id, i;
+                glob(src, function(err, files) {
+                    if(err) return;
+                    for(i=0; i < files.length; i++) {
+                        id = path.basename(files[i]).replace(/\..+?$/, '-template');
+                        cstream.append(Buffer('<script type="text/template" id="'+id+'">\n'));
+                        cstream.append(fs.createReadStream(files[i]));
+                        cstream.append(Buffer('</script>\n'));
+                    }
+
+                    if(files.length > 0) {
+                        cstream.pipe(wstream);
+                    } else {
+                        wstream.end('');
+                    }
+                });
+                
+            } else {
+                src = fix(src);
+                node.removeAttribute('src');
+                fs.createReadStream(src)
+                    .pipe(node.createWriteStream());
+            }
         });
     }
 
